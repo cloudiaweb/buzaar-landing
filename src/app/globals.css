@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --yellow:  #FFF22E;
+  --bg:      #111111;
+  --surface: #1C1C1E;
+  --card:    #2A2A2C;
+  --border:  #3A3A3C;
+  --teal:    #00B8B0;
+  --mint:    #5ED3A8;
+  --sky:     #38BDF8;
+  --violet:  #8B7FE8;
+  --muted:   #9A9AA0;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .yellow-glow {
+    box-shadow: 0 0 24px rgba(255, 242, 46, 0.35);
+  }
+  .yellow-glow-lg {
+    box-shadow: 0 0 48px rgba(255, 242, 46, 0.25);
+  }
+  .press {
+    transition: transform 0.1s ease;
+  }
+  .press:active {
+    transform: scale(0.97);
+  }
+  .font-anton {
+    font-family: var(--font-anton), sans-serif;
+  }
+  .font-mono-space {
+    font-family: var(--font-space-mono), monospace;
+  }
+}
+
+/* Marquee animation */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.animate-marquee-left  { animation: marquee-left  28s linear infinite; }
+.animate-marquee-right { animation: marquee-right 28s linear infinite; }
+.animate-gallery-scroll { animation: marquee-left 55s linear infinite; }
+.animate-gallery-scroll:hover { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-left,
+  .animate-marquee-right { animation: none; }
+}
