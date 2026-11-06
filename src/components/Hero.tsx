@@ -34,10 +34,12 @@ export default function Hero() {
 
   return (
     <section id="features" className="relative min-h-[92vh] flex items-center overflow-hidden">
-      {/* Yellow diagonal blob */}
-      <div
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-[0.06] pointer-events-none"
+      {/* Yellow diagonal blob — pulsing glow */}
+      <motion.div
+        className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
         style={{ background: 'var(--yellow)', borderRadius: '40%', transform: 'translateY(-50%) rotate(-25deg) translateX(120px)' }}
+        animate={{ opacity: [0.05, 0.10, 0.05] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       <div className="max-w-7xl mx-auto px-5 py-20 w-full grid md:grid-cols-2 gap-12 items-center">
@@ -119,14 +121,16 @@ export default function Hero() {
           className="relative flex justify-center items-center h-[440px] md:h-[520px]"
         >
           {[
-            { rotate: '-8deg', x: '-72px', z: 1  },
-            { rotate: '0deg',  x: '0px',   z: 2  },
-            { rotate: '8deg',  x: '72px',  z: 1  },
+            { rotate: '-8deg', x: '-72px', z: 1, delay: 0    },
+            { rotate: '0deg',  x: '0px',   z: 2, delay: 0.4  },
+            { rotate: '8deg',  x: '72px',  z: 1, delay: 0.8  },
           ].map((pos, i) => (
-            <div
+            <motion.div
               key={i}
               className="absolute w-[200px] h-[380px] bg-surface border-2 border-border rounded-[2rem] overflow-hidden flex flex-col p-4 gap-3 shadow-2xl"
-              style={{ transform: `rotate(${pos.rotate}) translateX(${pos.x})`, zIndex: pos.z }}
+              style={{ rotate: pos.rotate, x: pos.x, zIndex: pos.z }}
+              animate={{ y: [0, -14, 0] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: pos.delay }}
             >
               {/* Mock status bar */}
               <div className="flex justify-between items-center">
@@ -153,7 +157,7 @@ export default function Hero() {
               <div className="w-10 h-10 rounded-full bg-yellow flex items-center justify-center self-end shadow-lg">
                 <span className="text-black font-anton text-lg leading-none">+</span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
 
